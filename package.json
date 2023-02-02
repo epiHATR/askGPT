@@ -2,7 +2,7 @@
   "name": "askgpt",
   "displayName": "AskGPT for VSCode",
   "description": "Use ChatGPT/OpenAI with your VSCode",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "repository": "https://github.com/epiHATR/askGPT",
   "icon": "images/askgpt_logo.png",
   "author": "epiHATR - Hai Tran",
@@ -26,6 +26,11 @@
         },
         {
           "command": "askgpt.askgptforcompletion",
+          "group": "askgpt",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "askgpt.askgptforgrammarcheck",
           "group": "askgpt",
           "when": "editorHasSelection"
         }
@@ -52,22 +57,24 @@
           "default": "text-davinci-003",
           "enum": [
             "text-davinci-003",
-            "text-curie-001"
+            "text-curie-001",
+            "code-davinci-002"
           ],
           "markdownDescription": "Select default model that can understand and generate natural language",
           "enumDescriptions": [
             "Most capable GPT-3 model. Can do any task the other models can do, often with higher quality, longer output and better instruction-following. Also supports inserting completions within text.",
-            "Very capable, but faster and lower cost than Davinci."
+            "Very capable, but faster and lower cost than Davinci.",
+            "Most capable Codex model. Particularly good at translating natural language to code. In addition to completing code, also supports inserting completions within code."
           ]
         },
         "askgpt.openai.temperature": {
           "type": "number",
-          "default": 0.9,
+          "default": 0.65,
           "markdownDescription": "What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer."
         },
         "askgpt.openai.tokens": {
           "type": "number",
-          "default": 1000,
+          "default": 1200,
           "markdownDescription": "The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096)."
         }
       }
@@ -80,6 +87,10 @@
       {
         "command": "askgpt.askgptforcompletion",
         "title": "askGPT: Show Me Code"
+      },
+      {
+        "command": "askgpt.askgptforgrammarcheck",
+        "title": "askGPT: Grammar Check"
       }
     ]
   },
