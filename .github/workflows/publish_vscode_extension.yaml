@@ -1,0 +1,32 @@
+name: Publish VSCode Extension
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Public VSCode Extension
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    environment: "Visual Studio Marketplace"
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v3
+    
+    - name: install node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+    
+    - run: npm install
+
+    - run: xvfb-run -a npm test
+      if: runner.os == 'Linux'
+    
+    - name: publish extension
+      if: success() && matrix.os == 'ubuntu-latest'
+      run: npm run deploy
+      env:
+        VSCE_PAT: ${{ secrets.PUBLISHER_PAT }}

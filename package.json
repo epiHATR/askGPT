@@ -1,0 +1,113 @@
+{
+  "name": "askgpt",
+  "displayName": "AskGPT for VSCode",
+  "description": "Use ChatGPT/OpenAI with your VSCode",
+  "version": "0.1.5",
+  "repository": "https://github.com/epiHATR/askGPT",
+  "icon": "images/askgpt_logo.png",
+  "author": "epiHATR - Hai Tran",
+  "publisher": "cloudcli",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:askgpt.settings"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "command": "askgpt.settings",
+          "group": "askgpt"
+        },
+        {
+          "command": "askgpt.askgptforcompletion",
+          "group": "askgpt",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "askgpt.settings",
+        "key": "ctrl+f2",
+        "mac": "cmd+f2"
+      }
+    ],
+    "configuration": {
+      "title": "AskGPT",
+      "properties": {
+        "askgpt.openai.apikey": {
+          "type": "string",
+          "pattern": "^sk-",
+          "default": null,
+          "markdownDescription": "An API key to authenticate OpenAI services. See yours at https://platform.openai.com/account/api-keys"
+        },
+        "askgpt.openai.defaultModel": {
+          "type": "string",
+          "default": "text-davinci-003",
+          "enum": [
+            "text-davinci-003",
+            "text-curie-001"
+          ],
+          "markdownDescription": "Select default model that can understand and generate natural language",
+          "enumDescriptions": [
+            "Most capable GPT-3 model. Can do any task the other models can do, often with higher quality, longer output and better instruction-following. Also supports inserting completions within text.",
+            "Very capable, but faster and lower cost than Davinci."
+          ]
+        },
+        "askgpt.openai.temperature": {
+          "type": "number",
+          "default": 0.9,
+          "markdownDescription": "What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer."
+        },
+        "askgpt.openai.tokens": {
+          "type": "number",
+          "default": 1000,
+          "markdownDescription": "The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096)."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "askgpt.settings",
+        "title": "askGPT: Settings"
+      },
+      {
+        "command": "askgpt.askgptforcompletion",
+        "title": "askGPT: Show Me Code"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "deploy": "vsce publish --no-yarn",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "^2.17.0",
+    "eslint": "^8.28.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "openai": "^3.1.0"
+  }
+}
