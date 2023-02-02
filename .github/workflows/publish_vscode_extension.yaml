@@ -28,9 +28,6 @@ jobs:
     - name: publish extension
       if: success() && matrix.os == 'ubuntu-latest'
       run: |
-        git config --global user.email "hidetran@gmail.com"
-        git config --global user.name "epiHATR"
-        git remote set-url origin https://epiHATR:${{ secrets.REPO_PAT}}@github.com/epiHATR/askGPT.git
-        npm run deploy_patch
+        npm run deploy
       env:
         VSCE_PAT: ${{ secrets.PUBLISHER_PAT }}
