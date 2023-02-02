@@ -7,7 +7,7 @@ jobs:
     name: Public VSCode Extension
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
     environment: "Visual Studio Marketplace"
     runs-on: ${{ matrix.os }}
     
@@ -27,6 +27,10 @@ jobs:
     
     - name: publish extension
       if: success() && matrix.os == 'ubuntu-latest'
-      run: npm run deploy
+      run: |
+        git config --global user.email "hidetran@gmail.com"
+        git config --global user.name "epiHATR"
+        git remote set-url origin https://epiHATR:${{ secrets.REPO_PAT}}@github.com/epiHATR/askGPT.git
+        npm run deploy_patch
       env:
         VSCE_PAT: ${{ secrets.PUBLISHER_PAT }}
