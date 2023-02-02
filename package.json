@@ -2,7 +2,7 @@
   "name": "askgpt",
   "displayName": "AskGPT for VSCode",
   "description": "Use ChatGPT/OpenAI with your VSCode",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "repository": "https://github.com/epiHATR/askGPT",
   "icon": "images/askgpt_logo.png",
   "author": "epiHATR - Hai Tran",
@@ -67,7 +67,7 @@
         },
         "askgpt.openai.tokens": {
           "type": "number",
-          "default": 1000,
+          "default": 200,
           "markdownDescription": "The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096)."
         }
       }
