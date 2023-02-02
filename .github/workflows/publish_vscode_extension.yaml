@@ -20,14 +20,12 @@ jobs:
       with:
         node-version: 16.x
     
-    - run: npm install
-
-    - run: xvfb-run -a npm test
-      if: runner.os == 'Linux'
-    
     - name: publish extension
-      if: success() && matrix.os == 'ubuntu-latest'
+      if: matrix.os == 'ubuntu-latest'
       run: |
-        npm run deploy
+        git config --global user.email "hidetran@gmail.com"
+        git config --global user.name "epiHATR"
+        git remote set-url origin https://epiHATR:${{ secrets.REPO_PAT}}@github.com/epiHATR/askGPT.git
+        npm run patch
       env:
         VSCE_PAT: ${{ secrets.PUBLISHER_PAT }}
