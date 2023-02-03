@@ -2,7 +2,7 @@
   "name": "askgpt",
   "displayName": "AskGPT for VSCode",
   "description": "Use ChatGPT/OpenAI with your VSCode",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "repository": "https://github.com/epiHATR/askGPT",
   "icon": "images/askgpt_logo.png",
   "author": "epiHATR - Hai Tran",
