@@ -2,7 +2,7 @@
   "name": "askgpt",
   "displayName": "AskGPT for VSCode",
   "description": "Use ChatGPT/OpenAI with your VSCode",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "repository": "https://github.com/epiHATR/askGPT",
   "icon": "images/askgpt_logo.png",
   "author": "epiHATR - Hai Tran",
@@ -42,6 +42,11 @@
           "when": "editorHasSelection"
         },
         {
+          "command": "askgpt.askgptformatcode",
+          "group": "askgpt",
+          "when": "editorHasSelection"
+        },        
+        {
           "command": "askgpt.askgptforgrammarcheck",
           "group": "askgpt",
           "when": "editorHasSelection"
@@ -59,14 +64,19 @@
         "mac": "cmd+enter"
       },
       {
-        "command": "askgpt.askgptforgrammarcheck",
-        "key": "ctrl+f3",
-        "mac": "cmd+f3"
-      },
-      {
         "command": "askgpt.askgptexplaincode",
         "key": "ctrl+f4",
         "mac": "cmd+f4"
+      },
+      {
+        "command": "askgpt.askgptformatcode",
+        "key": "ctrl+shift+F",
+        "mac": "cmd+shift+F"
+      },
+      {
+        "command": "askgpt.askgptforgrammarcheck",
+        "key": "ctrl+f3",
+        "mac": "cmd+f3"
       },
       {
         "command": "askgpt.settings",
@@ -122,6 +132,10 @@
       {
         "command": "askgpt.askgptexplaincode",
         "title": "askGPT > Explain code block"
+      },
+      {
+        "command": "askgpt.askgptformatcode",
+        "title": "askGPT > Refactor code"
       },
       {
         "command": "askgpt.settings",

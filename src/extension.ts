@@ -33,6 +33,9 @@ export const requestOpenAI = async (editor: vscode.TextEditor, type: string) => 
 					case "explaincode":
 						prompt = "explain my code block bellow with comment each line \n" + selectedText;
 						break;
+					case "refactor":
+						prompt = "refactor/format my code block bellow \n" + selectedText;
+						break;
 					default:
 						prompt = selectedText;
 						break;
@@ -57,7 +60,10 @@ export const requestOpenAI = async (editor: vscode.TextEditor, type: string) => 
 								editor?.edit(builder => builder.replace(selection, selectedText + text));
 								break;
 							case "explaincode":
-								editor?.edit(builder => builder.replace(selection,  text.slice(4) + "\n\n"+ selectedText));
+								editor?.edit(builder => builder.replace(selection, text.slice(4) + "\n\n" + selectedText));
+								break;
+							case "refactor":
+								editor?.edit(builder => builder.replace(selection, text.slice(4)));
 								break;
 							case "grammarcheck":
 								editor?.edit(builder => builder.replace(selection, text));
@@ -75,6 +81,9 @@ export const requestOpenAI = async (editor: vscode.TextEditor, type: string) => 
 					if (action === "Go to Settings") {
 						vscode.commands.executeCommand('workbench.action.openSettings', "askgpt");
 					}
+				}
+				else {
+					vscode.window.showErrorMessage("There was a problem while running chatGPT API, please try again!")
 				}
 			}
 		}
@@ -112,6 +121,20 @@ export function activate(context: vscode.ExtensionContext) {
 				cancellable: true,
 			}, async (progress): Promise<void> => {
 				await requestOpenAI(editor, "explaincode");
+				progress.report({ increment: 100 });
+			});
+		}
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('askgpt.askgptformatcode', async () => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			vscode.window.withProgress({
+				location: vscode.ProgressLocation.Notification,
+				title: "askGPT - Refactoring your code block",
+				cancellable: true,
+			}, async (progress): Promise<void> => {
+				await requestOpenAI(editor, "refactor");
 				progress.report({ increment: 100 });
 			});
 		}
