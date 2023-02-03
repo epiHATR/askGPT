@@ -2,7 +2,7 @@
   "name": "askgpt",
   "displayName": "AskGPT for VSCode",
   "description": "Use ChatGPT/OpenAI with your VSCode",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "repository": "https://github.com/epiHATR/askGPT",
   "icon": "images/askgpt_logo.png",
   "author": "epiHATR - Hai Tran",
@@ -87,12 +87,6 @@
     "configuration": {
       "title": "AskGPT",
       "properties": {
-        "askgpt.openai.apikey": {
-          "type": "string",
-          "pattern": "^sk-",
-          "default": null,
-          "markdownDescription": "An API key to authenticate OpenAI services. See yours at https://platform.openai.com/account/api-keys"
-        },
         "askgpt.openai.defaultModel": {
           "type": "string",
           "default": "text-davinci-003",
@@ -140,6 +134,14 @@
       {
         "command": "askgpt.settings",
         "title": "askGPT > Settings"
+      },
+      {
+        "command": "askgpt.setKey",
+        "title": "askGPT > Set API Key"
+      },
+      {
+        "command": "askgpt.removeKey",
+        "title": "askGPT > Remove API Key"
       }
     ]
   },
