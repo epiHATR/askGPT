@@ -11,7 +11,18 @@
     "vscode": "^1.74.0"
   },
   "categories": [
+    "Machine Learning",
+    "Programming Languages",
+    "Extension Packs",
+    "Data Science",
     "Other"
+  ],
+  "keywords": [
+    "chatGPT",
+    "OpenAI",
+    "VSCode",
+    "ai",
+    "copilot"
   ],
   "activationEvents": [
     "onCommand:askgpt.settings"
