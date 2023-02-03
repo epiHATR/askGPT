@@ -11,15 +11,25 @@ Make sure you have your OpenAI API key added at https://platform.openai.com/acco
 - Right click ⤍ AskGPT: Show me code
 - Wait & enjoys 😎
 
+## Hot Keys
+To use keyboard, you must selected your text in the VSCode editor then press one of key combination bellow:
+- ```Ctrl/Cmd + F2```...................Go to Settings
+- ```Ctrl/Cmd + F3```...................English grammar check
+- ```Ctrl/Cmd + F4```...................Explain code block
+- ```Ctrl/Cmd + Enter```............Search for code by chatGPT
+- ```Ctrl/Cmd + Shift + F```...Refactor code
+
 ## Installation
 Open your VSCode ⤍ Extensions and search for ```AskGPT for VSCode``` then ```Install```.
 ![Installation](images/install.gif)
 
-Press ```cmd + shift + p``` and type ```askGPT: Settings``` to open Settings page then enter OpenAI API key.
-![Installation](images/settings.gif)
+Press ```cmd + shift + p``` and type ```askGPT> Set API Key``` to open to setup OpenAI API key.
+![Installation](images/addkey.gif)
 
+Write your code request under a comment, then ```Right Click + Action```
 ![ask](images/ask_code.gif)
 
+Wait until result appears
 ![ask](images/result.gif)
 
 It took few seconds to get code suggested then your comment will be replaced by code.
