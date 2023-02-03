@@ -1,5 +1,20 @@
 import * as vscode from 'vscode';
 
+export const showIdicator = (message: string, timeout = 3000): void => {
+	void vscode.window.withProgress(
+		{
+			location: vscode.ProgressLocation.Notification,
+			title: message,
+			cancellable: false,
+		},
+
+		async (progress): Promise<void> => {
+			await waitFor(timeout, () => { return false; });
+			progress.report({ increment: 100 });
+		},
+	);
+};
+
 export const showMessageWithTimeout = (message: string, timeout = 3000): void => {
 	void vscode.window.withProgress(
 		{

@@ -2,7 +2,7 @@
   "name": "askgpt",
   "displayName": "AskGPT for VSCode",
   "description": "Use ChatGPT/OpenAI with your VSCode",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "repository": "https://github.com/epiHATR/askGPT",
   "icon": "images/askgpt_logo.png",
   "author": "epiHATR - Hai Tran",
@@ -32,11 +32,12 @@
     "menus": {
       "editor/context": [
         {
-          "command": "askgpt.settings",
-          "group": "askgpt"
+          "command": "askgpt.askgptforcompletion",
+          "group": "askgpt",
+          "when": "editorHasSelection"
         },
         {
-          "command": "askgpt.askgptforcompletion",
+          "command": "askgpt.askgptexplaincode",
           "group": "askgpt",
           "when": "editorHasSelection"
         },
@@ -44,10 +45,29 @@
           "command": "askgpt.askgptforgrammarcheck",
           "group": "askgpt",
           "when": "editorHasSelection"
+        },
+        {
+          "command": "askgpt.settings",
+          "group": "askgpt"
         }
       ]
     },
     "keybindings": [
+      {
+        "command": "askgpt.askgptforcompletion",
+        "key": "ctrl+enter",
+        "mac": "cmd+enter"
+      },
+      {
+        "command": "askgpt.askgptforgrammarcheck",
+        "key": "ctrl+f3",
+        "mac": "cmd+f3"
+      },
+      {
+        "command": "askgpt.askgptexplaincode",
+        "key": "ctrl+f4",
+        "mac": "cmd+f4"
+      },
       {
         "command": "askgpt.settings",
         "key": "ctrl+f2",
@@ -92,16 +112,20 @@
     },
     "commands": [
       {
-        "command": "askgpt.settings",
-        "title": "askGPT: Settings"
-      },
-      {
         "command": "askgpt.askgptforcompletion",
-        "title": "askGPT: Show Me Code"
+        "title": "askGPT > Show me code"
       },
       {
         "command": "askgpt.askgptforgrammarcheck",
-        "title": "askGPT: Grammar Check"
+        "title": "askGPT > Grammar check"
+      },
+      {
+        "command": "askgpt.askgptexplaincode",
+        "title": "askGPT > Explain code block"
+      },
+      {
+        "command": "askgpt.settings",
+        "title": "askGPT > Settings"
       }
     ]
   },
