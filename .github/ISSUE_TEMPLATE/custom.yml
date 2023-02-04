@@ -1,0 +1,65 @@
+name: Report an issue
+description: Report an issue when askGPT run failed on your machine
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - epiHATR
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+  - type: dropdown
+    id: version
+    attributes:
+      label: askGPT Version
+      options:
+        - v0.1.16 (Default)
+        - v0.1.15
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: vscode
+    attributes:
+      label: What is your VSCode version?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System (OS) name
+      options:
+        - Windows
+        - MacOS
+        - Other
+    validations:
+      required: true 
+  - type: checkboxes     
+    id: key
+    attributes:
+      label: Installation checklist
+      options:
+        - label: I have configured my OpenAI API key
+          required: true
+        - label: I have set correct model & tokens
+          required: true             
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you experienced!
+    validations:
+      required: true
+  
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output or error message
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell

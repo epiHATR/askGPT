@@ -1,0 +1,35 @@
+name: Create a feature request
+description: Request a new feature
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees:
+  - epiHATR
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
+
+  - type: input
+    id: featurename
+    attributes:
+      label: What are you requesting for ?
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details about your request?
+      placeholder: What do you need us to improve askGPT
+    validations:
+      required: true      
+
+  - type: textarea
+    id: suggest
+    attributes:
+      label: Do you have any code suggested?
+      description: Provide us what code you're suggesting for feature request?
+      placeholder: Enter extension.ts code block for your feature request!
+    validations:
+      required: false
