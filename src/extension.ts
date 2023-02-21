@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import { showMessageWithTimeout } from './helper';
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const { Configuration, OpenAIApi } = require("openai");
-import Settings from "./apiCredential"
+import  OpenAI  from "openai";
+
+import Settings from "./apiCredential";
 
 export const requestOpenAI = async (editor: vscode.TextEditor, type: string, apiKey: string | undefined) => {
 	const selection = editor?.selection;
@@ -21,17 +21,16 @@ export const requestOpenAI = async (editor: vscode.TextEditor, type: string, api
 			if (apiKey !== undefined && apiKey.length >= 40) {
 				const settingInstance = Settings.instance;
 				await settingInstance.storeApiKey(apiKey);
-				vscode.window.showInformationMessage("Your OpenAI API key was securely saved!", "Close")
+				vscode.window.showInformationMessage("Your OpenAI API key was securely saved!", "Close");
 			}
 		}
 	}
 	else {
 		if (selection && selectedText) {
-			const configuration = new Configuration({
+			const openai = new OpenAI({
 				apiKey: apiKey,
 			});
 
-			const openai = new OpenAIApi(configuration);
 			try {
 				let prompt = "";
 				switch (type) {
@@ -51,7 +50,7 @@ export const requestOpenAI = async (editor: vscode.TextEditor, type: string, api
 						prompt = selectedText;
 						break;
 				}
-				const response = await openai.createCompletion({
+				const response = await openai.completions.create({
 					model: config.openai["defaultModel"],
 					prompt: prompt + "{}",
 					// eslint-disable-next-line @typescript-eslint/naming-convention
@@ -62,9 +61,9 @@ export const requestOpenAI = async (editor: vscode.TextEditor, type: string, api
 					stop: ["{}"]
 				});
 
-				if (response.data.choices) {
-					console.log(response.data);
-					const text = response.data.choices[0].text;
+				if (response.choices) {
+					console.log(response);
+					const text = response.choices[0].text;
 					if (text) {
 						switch (type) {
 							case "askcode":
@@ -99,12 +98,12 @@ export const requestOpenAI = async (editor: vscode.TextEditor, type: string, api
 						if (apiKey !== undefined && apiKey.length >= 40) {
 							const settingInstance = Settings.instance;
 							await settingInstance.storeApiKey(apiKey);
-							vscode.window.showInformationMessage("Your OpenAI API key was securely saved!", "Close")
+							vscode.window.showInformationMessage("Your OpenAI API key was securely saved!", "Close");
 						}
 					}
 				}
 				else {
-					vscode.window.showErrorMessage("There was a problem while running chatGPT API, please try again!")
+					vscode.window.showErrorMessage(e.toString());
 				}
 			}
 		}
@@ -191,15 +190,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (apiKey !== undefined && apiKey.length >= 40) {
 			await settingInstance.storeApiKey(apiKey);
-			vscode.window.showInformationMessage("Your OpenAI API key was securely saved!", "Close")
+			vscode.window.showInformationMessage("Your OpenAI API key was securely saved!", "Close");
 		}
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand('askgpt.removeKey', async () => {
 		const answer = await vscode.window.showWarningMessage("Do you want to remove OpenAI API key", "Yes, remove", "No");
-		if (answer == "Yes, remove") {
+		if (answer === "Yes, remove") {
 			await settingInstance.storeApiKey("sk-");
-			vscode.window.showInformationMessage("Your OpenAI API key was removed", "Close")
+			vscode.window.showInformationMessage("Your OpenAI API key was removed", "Close");
 		}
 	}));
 }

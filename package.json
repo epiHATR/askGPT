@@ -2,7 +2,7 @@
   "name": "askgpt",
   "displayName": "AskGPT for VSCode",
   "description": "Use ChatGPT/OpenAI with your VSCode",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "repository": "https://github.com/epiHATR/askGPT",
   "icon": "images/askgpt_logo.png",
   "author": "epiHATR - Hai Tran",
@@ -24,9 +24,7 @@
     "ai",
     "copilot"
   ],
-  "activationEvents": [
-    "onCommand:askgpt.settings"
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "menus": {
@@ -45,7 +43,7 @@
           "command": "askgpt.askgptformatcode",
           "group": "askgpt",
           "when": "editorHasSelection"
-        },        
+        },
         {
           "command": "askgpt.askgptforgrammarcheck",
           "group": "askgpt",
@@ -89,17 +87,22 @@
       "properties": {
         "askgpt.openai.defaultModel": {
           "type": "string",
-          "default": "text-davinci-003",
+          "default": "gpt-3.5-turbo",
           "enum": [
-            "text-davinci-003",
-            "text-curie-001",
-            "code-davinci-002"
+            "gpt-3.5-turbo",
+            "gpt-4",
+            "text-embedding-ada-002",
+            "whisper-1",
+            "tts-1",
+            "dall-e-2",
+            "dall-e-3"
           ],
           "markdownDescription": "Select default model that can understand and generate natural language",
           "enumDescriptions": [
-            "Most capable GPT-3 model. Can do any task the other models can do, often with higher quality, longer output and better instruction-following. Also supports inserting completions within text.",
-            "Very capable, but faster and lower cost than Davinci.",
-            "Most capable Codex model. Particularly good at translating natural language to code. In addition to completing code, also supports inserting completions within code."
+           "A set of models that improve on GPT-3 and can understand as well as generate natural language or code",
+           "A set of models that improve on GPT-3.5 and can understand as well as generate natural language or code",
+           "A set of models that can convert text into a numerical form",
+           "A model that can convert audio into text"
           ]
         },
         "askgpt.openai.temperature": {
@@ -170,6 +173,6 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
-    "openai": "^3.1.0"
+    "openai": "^4.17.0"
   }
 }
